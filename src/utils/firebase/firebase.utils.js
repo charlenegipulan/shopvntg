@@ -27,6 +27,8 @@ provider.setCustomParameters({
 //instantiates firebase auth
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
 
 //ceate db and instiate firebase database
 export const db = getFirestore();
@@ -39,7 +41,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   const userSnapshot = await getDoc(userDocRef);
   console.log(userSnapshot.exists());
 
-    //check if user snapshot exist, if not set it in our database
+  //check if user snapshot exist, if not set it in our database
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
@@ -56,9 +58,4 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   }
 
   return userDocRef;
-  // if user data exist
-
-  //if user data does not exist
-
-  // retur back user Doc
 };
